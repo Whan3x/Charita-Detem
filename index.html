@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charita dětem z.s. – Pomáháme dětem, které to potřebují</title>
+  <meta name="description" content="Charita dětem z.s. podporuje rozvoj nadání dětí z dětských domovů a pomáhá realizovat rekondiční pobyty pro děti s onkologickým onemocněním." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #1a1a2e;
+      background: #ffffff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ===== DESIGN TOKENS ===== */
+    :root {
+      --red:       #C0392B;
+      --red-dark:  #922B21;
+      --red-light: #FDEDEC;
+      --orange:    #E8751A;
+      --gold:      #F39C12;
+      --blue:      #1A5276;
+      --blue-light:#D6EAF8;
+      --gray-100:  #F8F9FA;
+      --gray-200:  #EEEEEE;
+      --gray-400:  #9E9E9E;
+      --gray-700:  #424242;
+      --white:     #FFFFFF;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,.07);
+      --shadow-md: 0 6px 24px rgba(0,0,0,.10);
+      --shadow-lg: 0 16px 48px rgba(0,0,0,.13);
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --transition: .25s ease;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    h1,h2,h3,h4 { font-family: 'Merriweather', serif; line-height: 1.25; }
+    h1 { font-size: clamp(2rem, 5vw, 3.25rem); }
+    h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); }
+    h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); }
+    p  { font-size: 1.0625rem; color: var(--gray-700); }
+
+    /* ===== UTILITIES ===== */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    .section    { padding: 88px 0; }
+    .section--gray { background: var(--gray-100); }
+    .section--red  { background: var(--red); color: #fff; }
+    .section--blue { background: var(--blue); color: #fff; }
+    .text-center { text-align: center; }
+    .badge {
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 999px;
+      background: var(--red-light);
+      color: var(--red);
+      margin-bottom: 16px;
+    }
+    .badge--white { background: rgba(255,255,255,.2); color: #fff; }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all var(--transition);
+    }
+    .btn-primary {
+      background: var(--red);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-outline {
+      background: transparent;
+      color: var(--red);
+      border-color: var(--red);
+    }
+    .btn-outline:hover { background: var(--red); color: #fff; transform: translateY(-2px); }
+    .btn-white {
+      background: #fff;
+      color: var(--red);
+    }
+    .btn-white:hover { background: var(--red-light); transform: translateY(-2px); }
+    .btn-outline-white {
+      background: transparent;
+      color: #fff;
+      border-color: rgba(255,255,255,.6);
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,.15); }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--gray-200);
+      transition: box-shadow var(--transition);
+    }
+    .nav.scrolled { box-shadow: var(--shadow-md); }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav__logo-icon {
+      width: 44px; height: 44px;
+      background: var(--red);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav__logo-icon svg { width: 24px; height: 24px; }
+    .nav__logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav__logo-name { font-weight: 800; font-size: 1.05rem; color: var(--red); letter-spacing: -.01em; }
+    .nav__logo-sub  { font-size: .7rem; color: var(--gray-400); font-weight: 500; letter-spacing: .05em; text-transform: uppercase; }
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav__links a {
+      font-size: .9rem;
+      font-weight: 500;
+      color: var(--gray-700);
+      transition: color var(--transition);
+    }
+    .nav__links a:hover { color: var(--red); }
+    .nav__cta { margin-left: 16px; }
+    .nav__burger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav__burger span { display: block; width: 24px; height: 2px; background: var(--gray-700); margin: 5px 0; transition: all .3s; border-radius: 2px; }
+    .nav__mobile {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--gray-200);
+      padding: 12px 0 16px;
+    }
+    .nav__mobile a {
+      display: block;
+      padding: 10px 24px;
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--gray-700);
+      transition: color var(--transition);
+    }
+    .nav__mobile a:hover { color: var(--red); background: var(--gray-100); }
+    .nav__mobile .btn { margin: 12px 24px 0; display: block; text-align: center; }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 160px 0 100px;
+      background: linear-gradient(135deg, #fff5f5 0%, #fff8f0 50%, #f0f6ff 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -100px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(192,57,43,.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -60px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(26,82,118,.06) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      position: relative; z-index: 1;
+    }
+    .hero__kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--red-light);
+      color: var(--red);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .hero__kicker::before { content: '♥'; font-size: 1em; }
+    .hero h1 { color: #1a1a2e; margin-bottom: 24px; }
+    .hero h1 span { color: var(--red); }
+    .hero__lead {
+      font-size: 1.125rem;
+      color: var(--gray-700);
+      max-width: 480px;
+      margin-bottom: 40px;
+      line-height: 1.75;
+    }
+    .hero__actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
+    .hero__trust {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--gray-200);
+    }
+    .hero__trust-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .85rem; color: var(--gray-400); font-weight: 500;
+    }
+    .hero__trust-item svg { color: var(--red); }
+    .hero__visual {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero__card-wrap {
+      position: relative; width: 100%; max-width: 440px;
+    }
+    .hero__main-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .hero__img-placeholder {
+      width: 100%;
+      height: 280px;
+      background: linear-gradient(135deg, #fde8e5 0%, #fce4d6 50%, #d5e8f7 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 16px;
+    }
+    .hero__img-icon {
+      font-size: 4rem;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,.1));
+    }
+    .hero__img-caption { font-size: .85rem; color: var(--gray-400); font-weight: 500; }
+    .hero__card-body { padding: 24px; }
+    .hero__card-body h4 { font-size: 1rem; margin-bottom: 8px; }
+    .hero__card-body p { font-size: .875rem; color: var(--gray-400); }
+    .hero__stat-card {
+      position: absolute;
+      background: #fff;
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      box-shadow: var(--shadow-md);
+      min-width: 150px;
+    }
+    .hero__stat-card--tl { top: -20px; left: -30px; }
+    .hero__stat-card--br { bottom: 20px; right: -30px; }
+    .hero__stat-num { font-size: 1.75rem; font-weight: 800; color: var(--red); font-family: 'Inter'; line-height: 1; }
+    .hero__stat-label { font-size: .75rem; color: var(--gray-400); font-weight: 500; margin-top: 4px; }
+
+    /* ===== ABOUT ===== */
+    .about__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about__img {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+    }
+    .about__img-box {
+      width: 100%; height: 400px;
+      background: linear-gradient(135deg, #fde8e5 0%, #fce4d6 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    }
+    .about__img-box .icon { font-size: 5rem; }
+    .about__img-badge {
+      position: absolute;
+      bottom: 24px; right: 24px;
+      background: var(--red);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      font-size: .875rem;
+      font-weight: 700;
+      box-shadow: var(--shadow-md);
+    }
+    .about__content h2 { margin-bottom: 20px; }
+    .about__lead {
+      font-size: 1.0625rem;
+      color: var(--gray-700);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+    .about__values {
+      display: flex; flex-direction: column; gap: 16px; margin-bottom: 36px;
+    }
+    .about__value {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 16px;
+      background: var(--gray-100);
+      border-radius: var(--radius-sm);
+      border-left: 4px solid var(--red);
+    }
+    .about__value-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+    .about__value-title { font-weight: 700; font-size: .95rem; margin-bottom: 4px; color: #1a1a2e; }
+    .about__value-text  { font-size: .875rem; color: var(--gray-400); }
+
+    /* ===== PROJECTS ===== */
+    .projects__lead { max-width: 640px; margin: 16px auto 56px; color: var(--gray-700); text-align: center; }
+    .projects__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .project-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .project-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .project-card__header {
+      padding: 40px 36px 28px;
+      background: linear-gradient(135deg, #fde8e5, #fce4d6);
+      display: flex; align-items: flex-start; gap: 20px;
+    }
+    .project-card__header--blue { background: linear-gradient(135deg, #d6eaf8, #d1ecf1); }
+    .project-card__icon-wrap {
+      width: 64px; height: 64px; flex-shrink: 0;
+      border-radius: var(--radius-sm);
+      background: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 4px 16px rgba(192,57,43,.3);
+    }
+    .project-card__icon-wrap--blue { background: var(--blue); box-shadow: 0 4px 16px rgba(26,82,118,.3); }
+    .project-card__meta h3 { color: #1a1a2e; margin-bottom: 6px; }
+    .project-card__tag {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--red);
+      color: #fff;
+    }
+    .project-card__tag--blue { background: var(--blue); }
+    .project-card__body { padding: 28px 36px 36px; }
+    .project-card__desc { font-size: .9625rem; color: var(--gray-700); line-height: 1.75; margin-bottom: 28px; }
+    .project-card__list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .project-card__list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: .9rem; color: var(--gray-700);
+    }
+    .project-card__list li::before {
+      content: '✓';
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      background: var(--red-light);
+      color: var(--red);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; font-weight: 700;
+      margin-top: 1px;
+    }
+    .project-card__list--blue li::before { background: var(--blue-light); color: var(--blue); }
+
+    /* ===== STATS ===== */
+    .stats__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .stat-item {
+      background: rgba(255,255,255,.08);
+      padding: 48px 32px;
+      text-align: center;
+      transition: background var(--transition);
+    }
+    .stat-item:hover { background: rgba(255,255,255,.14); }
+    .stat-item__num {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .stat-item__num span { color: var(--gold); }
+    .stat-item__label {
+      font-size: .875rem;
+      color: rgba(255,255,255,.7);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .stats__cta { text-align: center; margin-top: 52px; }
+    .stats__cta p { color: rgba(255,255,255,.7); margin-bottom: 24px; font-size: 1.0625rem; }
+
+    /* ===== HOW TO HELP ===== */
+    .help__lead { max-width: 600px; margin: 16px auto 56px; color: var(--gray-700); text-align: center; }
+    .help__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .help-card {
+      background: #fff;
+      border-radius: var(--radius-md);
+      padding: 36px 28px;
+      text-align: center;
+      border: 2px solid var(--gray-200);
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+    .help-card:hover { border-color: var(--red); transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .help-card.active { border-color: var(--red); background: var(--red-light); }
+    .help-card__icon { font-size: 2.75rem; margin-bottom: 16px; }
+    .help-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: #1a1a2e; }
+    .help-card p  { font-size: .875rem; color: var(--gray-400); line-height: 1.6; }
+    .donation-box {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--gray-200);
+      max-width: 720px; margin: 0 auto;
+    }
+    .donation-box h3 { margin-bottom: 8px; font-size: 1.4rem; }
+    .donation-box__sub { color: var(--gray-400); margin-bottom: 32px; font-size: .95rem; }
+    .donation-amounts {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px;
+    }
+    .amount-btn {
+      padding: 14px 8px;
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      background: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-align: center;
+    }
+    .amount-btn:hover { border-color: var(--red); color: var(--red); }
+    .amount-btn.active { border-color: var(--red); background: var(--red); color: #fff; }
+    .amount-btn .sub { display: block; font-size: .7rem; font-weight: 400; margin-top: 2px; opacity: .75; }
+    .donation-box__account {
+      background: var(--gray-100);
+      border-radius: var(--radius-sm);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+    .donation-box__account-label { font-size: .8rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; margin-bottom: 8px; }
+    .donation-box__account-num { font-size: 1.3rem; font-weight: 800; color: #1a1a2e; letter-spacing: .02em; }
+    .donation-box__account-bank { font-size: .875rem; color: var(--gray-400); margin-top: 4px; }
+    .donation-note { font-size: .8rem; color: var(--gray-400); line-height: 1.5; }
+
+    /* ===== TRANSPARENCY ===== */
+    .transparency__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .transparency__content h2 { margin-bottom: 20px; }
+    .transparency__content p { color: var(--gray-700); line-height: 1.8; margin-bottom: 20px; }
+    .transparency__certs { display: flex; flex-direction: column; gap: 12px; }
+    .cert-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 20px;
+      background: var(--gray-100);
+      border-radius: var(--radius-sm);
+    }
+    .cert-item__icon { font-size: 1.5rem; flex-shrink: 0; }
+    .cert-item__text { font-size: .9rem; color: var(--gray-700); font-weight: 500; }
+    .transparency__reports { display: flex; flex-direction: column; gap: 16px; }
+    .report-card {
+      background: var(--gray-100);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex; align-items: center; gap: 20px;
+      transition: background var(--transition);
+    }
+    .report-card:hover { background: var(--red-light); }
+    .report-card__icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: var(--red);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .report-card__info h4 { font-size: 1rem; margin-bottom: 4px; font-family: 'Inter'; font-weight: 700; }
+    .report-card__info p { font-size: .85rem; color: var(--gray-400); }
+    .report-card__arrow { margin-left: auto; color: var(--gray-400); font-size: 1.2rem; }
+
+    /* ===== GALLERY ===== */
+    .gallery__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 16px;
+    }
+    .gallery__item {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, #fde8e5, #fce4d6);
+    }
+    .gallery__item:first-child {
+      grid-row: 1 / 3;
+      min-height: 400px;
+    }
+    .gallery__item:not(:first-child) { min-height: 180px; }
+    .gallery__placeholder {
+      width: 100%; height: 100%;
+      min-height: inherit;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 8px;
+    }
+    .gallery__placeholder .emoji { font-size: 2.5rem; }
+    .gallery__placeholder p { font-size: .8rem; color: var(--gray-400); font-weight: 500; }
+    .gallery__item--blue { background: linear-gradient(135deg, #d6eaf8, #d1ecf1); }
+    .gallery__item--green { background: linear-gradient(135deg, #d5f5e3, #a9dfbf); }
+    .gallery__item--yellow { background: linear-gradient(135deg, #fef9e7, #fdebd0); }
+    .gallery__item--purple { background: linear-gradient(135deg, #f4ecf7, #d7bde2); }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .testimonial-card {
+      background: #fff;
+      border-radius: var(--radius-md);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 16px; left: 24px;
+      font-size: 4rem;
+      color: var(--red-light);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+    .testimonial-card__text { font-size: .9375rem; color: var(--gray-700); line-height: 1.75; margin-bottom: 24px; padding-top: 24px; font-style: italic; }
+    .testimonial-card__author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-card__avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      color: #fff;
+      font-weight: 700;
+      font-family: 'Inter';
+      flex-shrink: 0;
+    }
+    .testimonial-card__name { font-weight: 700; font-size: .9rem; color: #1a1a2e; }
+    .testimonial-card__role { font-size: .8rem; color: var(--gray-400); }
+
+    /* ===== CONTACT ===== */
+    .contact__inner {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .contact__info h2 { margin-bottom: 16px; }
+    .contact__info p { color: var(--gray-700); line-height: 1.8; margin-bottom: 32px; }
+    .contact__items { display: flex; flex-direction: column; gap: 20px; }
+    .contact__item { display: flex; align-items: flex-start; gap: 16px; }
+    .contact__item-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: var(--red-light);
+      color: var(--red);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .contact__item-label { font-size: .75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; margin-bottom: 4px; }
+    .contact__item-value { font-size: .975rem; color: #1a1a2e; font-weight: 500; }
+    .contact__form {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--gray-200);
+    }
+    .contact__form h3 { margin-bottom: 8px; font-size: 1.3rem; }
+    .contact__form .sub { color: var(--gray-400); margin-bottom: 28px; font-size: .9rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: .85rem; font-weight: 600; color: #1a1a2e; margin-bottom: 6px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      font-family: 'Inter', sans-serif;
+      font-size: .9375rem;
+      color: #1a1a2e;
+      transition: border-color var(--transition);
+      background: #fff;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--red);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-submit { width: 100%; padding: 16px; font-size: 1rem; border-radius: var(--radius-sm); }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #0f1729;
+      color: rgba(255,255,255,.75);
+      padding: 72px 0 0;
+    }
+    .footer__inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 56px;
+    }
+    .footer__brand .nav__logo { margin-bottom: 20px; }
+    .footer__brand p { font-size: .875rem; line-height: 1.7; max-width: 300px; }
+    .footer__brand .socials { display: flex; gap: 12px; margin-top: 24px; }
+    .footer__brand .social-btn {
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,.08);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      transition: background var(--transition);
+      cursor: pointer;
+    }
+    .footer__brand .social-btn:hover { background: var(--red); }
+    .footer__col h5 { font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; color: #fff; margin-bottom: 20px; font-family: 'Inter'; }
+    .footer__col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer__col ul li a {
+      font-size: .875rem;
+      color: rgba(255,255,255,.6);
+      transition: color var(--transition);
+    }
+    .footer__col ul li a:hover { color: #fff; }
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: .825rem;
+      color: rgba(255,255,255,.4);
+    }
+    .footer__bottom a { color: rgba(255,255,255,.5); }
+    .footer__bottom a:hover { color: #fff; }
+
+    /* ===== ANNOUNCEMENT BANNER ===== */
+    .announcement {
+      background: var(--red);
+      color: #fff;
+      text-align: center;
+      padding: 12px 24px;
+      font-size: .875rem;
+      font-weight: 500;
+      position: relative;
+      z-index: 1001;
+    }
+    .announcement a { color: #fff; text-decoration: underline; font-weight: 700; }
+
+    /* ===== SECTION HEADERS ===== */
+    .section-header { text-align: center; margin-bottom: 16px; }
+    .section-header h2 { color: #1a1a2e; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .stats__grid { grid-template-columns: repeat(2, 1fr); }
+      .footer__inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .section { padding: 64px 0; }
+      .hero { padding: 120px 0 72px; }
+      .hero__inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero__visual { display: none; }
+      .about__inner { grid-template-columns: 1fr; gap: 40px; }
+      .projects__grid { grid-template-columns: 1fr; }
+      .help__grid { grid-template-columns: 1fr; }
+      .donation-amounts { grid-template-columns: repeat(2, 1fr); }
+      .transparency__inner { grid-template-columns: 1fr; gap: 40px; }
+      .gallery__grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery__item:first-child { grid-row: auto; }
+      .testimonials__grid { grid-template-columns: 1fr; }
+      .contact__inner { grid-template-columns: 1fr; gap: 40px; }
+      .contact__form { padding: 32px 24px; }
+      .donation-box { padding: 32px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav__links, .nav__cta { display: none; }
+      .nav__burger { display: block; }
+      .footer__inner { grid-template-columns: 1fr; }
+      .footer__bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .stats__grid { grid-template-columns: 1fr; }
+      .gallery__grid { grid-template-columns: 1fr; }
+      .donation-amounts { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp .7s ease forwards; }
+    .fade-up-delay-1 { animation-delay: .1s; opacity: 0; }
+    .fade-up-delay-2 { animation-delay: .2s; opacity: 0; }
+    .fade-up-delay-3 { animation-delay: .3s; opacity: 0; }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ===== TOP BANNER CLOSE ===== */
+    .announcement__close { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); cursor: pointer; background: none; border: none; color: rgba(255,255,255,.7); font-size: 1.1rem; }
+
+    /* number counter animation */
+    .count-up { transition: none; }
+  </style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BANNER -->
+<div class="announcement" id="announcement">
+  ❤️ Právě probíhá jarní sbírka – pomozte dětem, které to potřebují.
+  <a href="#pomoc">Přispějte nyní →</a>
+  <button class="announcement__close" onclick="document.getElementById('announcement').style.display='none'">✕</button>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">
+        <div class="nav__logo-icon">
+          <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </div>
+        <div class="nav__logo-text">
+          <span class="nav__logo-name">Charita dětem</span>
+          <span class="nav__logo-sub">z. s.</span>
+        </div>
+      </a>
+
+      <ul class="nav__links">
+        <li><a href="#o-nas">O nás</a></li>
+        <li><a href="#projekty">Projekty</a></li>
+        <li><a href="#pomoc">Jak pomoci</a></li>
+        <li><a href="#transparentnost">Transparentnost</a></li>
+        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+
+      <a href="#pomoc" class="btn btn-primary nav__cta">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        Přispět
+      </a>
+
+      <button class="nav__burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- MOBILE NAV -->
+    <div class="nav__mobile" id="mobileNav">
+      <a href="#o-nas" onclick="closeMobile()">O nás</a>
+      <a href="#projekty" onclick="closeMobile()">Projekty</a>
+      <a href="#pomoc" onclick="closeMobile()">Jak pomoci</a>
+      <a href="#transparentnost" onclick="closeMobile()">Transparentnost</a>
+      <a href="#galerie" onclick="closeMobile()">Galerie</a>
+      <a href="#kontakt" onclick="closeMobile()">Kontakt</a>
+      <a href="#pomoc" class="btn btn-primary" onclick="closeMobile()">❤️ Přispět</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero__inner">
+      <div class="hero__content fade-up">
+        <div class="hero__kicker">Charita dětem z.s.</div>
+        <h1>Pomáháme dětem,<br/>které to <span>potřebují</span></h1>
+        <p class="hero__lead">
+          Podporujeme rozvoj nadání dětí z dětských domovů a pomáháme realizovat
+          rekondiční pobyty pro děti s onkologickým onemocněním. Každý dar mění
+          životy.
+        </p>
+        <div class="hero__actions fade-up fade-up-delay-1">
+          <a href="#pomoc" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            Přispět na pomoc dětem
+          </a>
+          <a href="#o-nas" class="btn btn-outline">Zjistit více</a>
+        </div>
+        <div class="hero__trust fade-up fade-up-delay-2">
+          <div class="hero__trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color: var(--red)"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+            Transparentní hospodaření
+          </div>
+          <div class="hero__trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color: var(--red)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            Ověřená sbírka MV ČR
+          </div>
+          <div class="hero__trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color: var(--red)"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+            Přes 500 podpořených dětí
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO VISUAL -->
+      <div class="hero__visual fade-up fade-up-delay-3">
+        <div class="hero__card-wrap">
+          <!-- Floating stat top-left -->
+          <div class="hero__stat-card hero__stat-card--tl">
+            <div class="hero__stat-num">500<span>+</span></div>
+            <div class="hero__stat-label">podpořených<br/>dětí celkem</div>
+          </div>
+          <!-- Main card -->
+          <div class="hero__main-card">
+            <div class="hero__img-placeholder">
+              <div class="hero__img-icon">👧🧒</div>
+              <p class="hero__img-caption">Děti ze spolupracujících dětských domovů</p>
+            </div>
+            <div class="hero__card-body">
+              <h4>Letní rekondiční tábor 2024</h4>
+              <p>Sportovní a kulturní program pro 48 dětí</p>
+            </div>
+          </div>
+          <!-- Floating stat bottom-right -->
+          <div class="hero__stat-card hero__stat-card--br">
+            <div class="hero__stat-num">12<span>+</span></div>
+            <div class="hero__stat-label">let pomáháme<br/>dětem</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="o-nas">
+  <div class="container">
+    <div class="about__inner">
+      <div class="about__img reveal">
+        <div class="about__img-box">
+          <div class="icon">🤝</div>
+          <p style="font-size:.9rem;color:var(--gray-400);font-weight:500">Parta srdcí s velkým záměrem</p>
+        </div>
+        <div class="about__img-badge">
+          Registrovaný spolek od 2012
+        </div>
+      </div>
+
+      <div class="about__content reveal">
+        <div class="badge">O organizaci</div>
+        <h2>Jsme tu pro děti, které neměly v životě snadný start</h2>
+        <p class="about__lead">
+          <strong>Charita dětem z.s.</strong> je nezisková organizace, která od roku 2012 pomáhá
+          dětem v dětských domovech a dětem bojujícím s onkologickými onemocněními.
+          Věříme, že každé dítě si zaslouží šanci prožít dětství plné radosti,
+          rozvoje a naděje – bez ohledu na svůj osud.
+        </p>
+        <p class="about__lead" style="margin-bottom:0">
+          Prostřednictvím veřejných sbírek a partnerství s dárci financujeme
+          rekondiční pobyty, sportovní a kulturní programy a rozvoj talentu.
+          Naší vizí je svět, kde žádné dítě nezůstane bez pomoci.
+        </p>
+
+        <div class="about__values">
+          <div class="about__value">
+            <div class="about__value-icon">🎯</div>
+            <div>
+              <div class="about__value-title">Přímá pomoc</div>
+              <div class="about__value-text">Peníze jdou přímo k dětem – ne na marketing ani byrokracii</div>
+            </div>
+          </div>
+          <div class="about__value">
+            <div class="about__value-icon">🔍</div>
+            <div>
+              <div class="about__value-title">Transparentnost</div>
+              <div class="about__value-text">Veškeré výdaje zveřejňujeme ve výročních zprávách a na transparentním účtu</div>
+            </div>
+          </div>
+          <div class="about__value">
+            <div class="about__value-icon">💪</div>
+            <div>
+              <div class="about__value-title">Dlouhodobý dopad</div>
+              <div class="about__value-text">Budujeme sebevědomí a dovednosti, které dětem zůstanou na celý život</div>
+            </div>
+          </div>
+        </div>
+
+        <a href="#projekty" class="btn btn-primary">Naše projekty →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section section--gray" id="projekty">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="badge">Naše projekty</div>
+      <h2>Co konkrétně děláme</h2>
+    </div>
+    <p class="projects__lead reveal">
+      Zaměřujeme se na dvě hlavní oblasti pomoci – obě s jasným a měřitelným dopadem
+      na životy dětí, které to nejvíce potřebují.
+    </p>
+
+    <div class="projects__grid">
+      <!-- PROJECT 1 -->
+      <div class="project-card reveal">
+        <div class="project-card__header">
+          <div class="project-card__icon-wrap">🏠</div>
+          <div class="project-card__meta">
+            <span class="project-card__tag">Projekt 1</span>
+            <h3>Podpora dětí z dětských domovů</h3>
+          </div>
+        </div>
+        <div class="project-card__body">
+          <p class="project-card__desc">
+            Pomáháme dětem z dětských domovů rozvíjet jejich nadání a talent.
+            Věříme, že správná příležitost může změnit celý život. Proto
+            organizujeme sportovní, kulturní a vzdělávací aktivity, které
+            dětem dávají šanci ukázat, co v nich je.
+          </p>
+          <ul class="project-card__list">
+            <li>Sportovní kroužky a soutěže</li>
+            <li>Kulturní výlety a divadelní představení</li>
+            <li>Vzdělávací workshopy a doučování</li>
+            <li>Podpora rozvoje individuálního talentu</li>
+            <li>Celotáborové programy o prázdninách</li>
+          </ul>
+          <a href="#pomoc" class="btn btn-outline" style="font-size:.875rem;padding:10px 24px">Podpořit projekt →</a>
+        </div>
+      </div>
+
+      <!-- PROJECT 2 -->
+      <div class="project-card reveal">
+        <div class="project-card__header project-card__header--blue">
+          <div class="project-card__icon-wrap project-card__icon-wrap--blue">🏥</div>
+          <div class="project-card__meta">
+            <span class="project-card__tag project-card__tag--blue">Projekt 2</span>
+            <h3>Rekondiční pobyty pro onkologicky nemocné děti</h3>
+          </div>
+        </div>
+        <div class="project-card__body">
+          <p class="project-card__desc">
+            Děti léčené s onkologickým onemocněním potřebují po náročné terapii
+            prostor pro zotavení, pohyb a radost ze života. Formou veřejné sbírky
+            zajišťujeme rekondiční pobyty, které jim vracejí sílu, úsměv a
+            naději na lepší zítřky.
+          </p>
+          <ul class="project-card__list project-card__list--blue">
+            <li>Týdenní rekondiční pobyty v přírodě</li>
+            <li>Odborný zdravotnický doprovod</li>
+            <li>Pohybové a relaxační aktivity</li>
+            <li>Celková fyzická i psychická rekonvalescence</li>
+            <li>Návrat k běžnému životu dítěte</li>
+          </ul>
+          <a href="#pomoc" class="btn btn-outline" style="font-size:.875rem;padding:10px 24px;border-color:var(--blue);color:var(--blue)">Podpořit projekt →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section section--red" id="statistiky">
+  <div class="container">
+    <div class="section-header reveal" style="margin-bottom:48px;">
+      <div class="badge badge--white">Náš dopad v číslech</div>
+      <h2 style="color:#fff;">Za více než dekádu jsme<br/>pomohli stovkám dětí</h2>
+    </div>
+
+    <div class="stats__grid reveal">
+      <div class="stat-item">
+        <span class="stat-num" data-target="500">0</span>
+        <div class="stat-item__label">podpořených dětí<br/>celkem</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="48">0</span>
+        <div class="stat-item__label">rekondiční pobyty<br/>pro onkologické děti</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="12">0</span>
+        <div class="stat-item__label">let aktivní pomoci<br/>od roku 2012</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="15">0</span>
+        <div class="stat-item__label">spolupracujících<br/>dětských domovů</div>
+      </div>
+    </div>
+
+    <div class="stats__cta reveal">
+      <p>Stojíme za každým číslem. Přidejte se k nám – vaše pomoc je neocenitelná.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="#pomoc" class="btn btn-white">❤️ Přispět nyní</a>
+        <a href="#transparentnost" class="btn btn-outline-white">Výroční zprávy</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO HELP -->
+<section class="section" id="pomoc">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="badge">Jak pomoci</div>
+      <h2>Přispět je jednoduché</h2>
+    </div>
+    <p class="help__lead reveal">
+      Vyberte si způsob pomoci, který vám nejvíce vyhovuje.
+      Každý příspěvek – malý i velký – mění životy dětí k lepšímu.
+    </p>
+
+    <div class="help__grid">
+      <div class="help-card active reveal" onclick="setHelpType(this, 'donate')">
+        <div class="help-card__icon">💳</div>
+        <h3>Jednorázový dar</h3>
+        <p>Přispějte libovolnou částkou jednorázově na transparentní účet organizace.</p>
+      </div>
+      <div class="help-card reveal" onclick="setHelpType(this, 'regular')">
+        <div class="help-card__icon">🔄</div>
+        <h3>Pravidelná podpora</h3>
+        <p>Nastavte trvalý příkaz a pomáhejte dětem každý měsíc automaticky.</p>
+      </div>
+      <div class="help-card reveal" onclick="setHelpType(this, 'volunteer')">
+        <div class="help-card__icon">🤝</div>
+        <h3>Dobrovolnictví</h3>
+        <p>Zapojte se osobně – jako průvodce, trenér nebo organizátor akcí.</p>
+      </div>
+    </div>
+
+    <!-- DONATION BOX -->
+    <div class="donation-box reveal" id="donationBox">
+      <h3>Dar pro děti</h3>
+      <p class="donation-box__sub">Vyberte částku nebo zadejte vlastní. Vše jde přímo na pomoc dětem.</p>
+
+      <div class="donation-amounts">
+        <button class="amount-btn" onclick="setAmount(this, 200)">
+          200 Kč
+          <span class="sub">malý dar</span>
+        </button>
+        <button class="amount-btn active" onclick="setAmount(this, 500)">
+          500 Kč
+          <span class="sub">populární</span>
+        </button>
+        <button class="amount-btn" onclick="setAmount(this, 1000)">
+          1 000 Kč
+          <span class="sub">velký dar</span>
+        </button>
+        <button class="amount-btn" onclick="setAmount(this, 0)">
+          Vlastní
+          <span class="sub">libovolně</span>
+        </button>
+      </div>
+
+      <div class="donation-box__account">
+        <div class="donation-box__account-label">Transparentní účet</div>
+        <div class="donation-box__account-num" id="accountNum">2501234567 / 2010</div>
+        <div class="donation-box__account-bank">Fio banka, a.s. · VS: 2024 · zpráva: Dar pro děti</div>
+      </div>
+
+      <p class="donation-note">
+        🔒 Platba je bezpečná. Výpis účtu je veřejně dostupný. Dar je daňově uznatelný
+        (zákon č. 586/1992 Sb.). Po zaslání daru vám na vyžádání zašleme potvrzení pro
+        daňové účely.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSPARENCY -->
+<section class="section section--gray" id="transparentnost">
+  <div class="container">
+    <div class="transparency__inner">
+      <div class="transparency__content reveal">
+        <div class="badge">Transparentnost</div>
+        <h2>Víte přesně, kam vaše peníze jdou</h2>
+        <p>
+          Transparentnost je pro nás základní hodnotou, ne pouhý slogan.
+          Veškeré příjmy i výdaje organizace jsou veřejně dostupné na
+          transparentním účtu Fio banky, přístupném komukoliv 24/7.
+        </p>
+        <p>
+          Každý rok vydáváme podrobnou výroční zprávu s přehledem aktivit,
+          financí a dopadu naší práce. Jsme zapsaný spolek (z.s.) registrovaný
+          u Ministerstva vnitra České republiky a naše sbírka je řádně povolena.
+        </p>
+
+        <div class="transparency__certs">
+          <div class="cert-item">
+            <div class="cert-item__icon">🏛️</div>
+            <div class="cert-item__text">Registrovaný spolek – Ministerstvo vnitra ČR</div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-item__icon">📋</div>
+            <div class="cert-item__text">Povolení k veřejné sbírce č. MV-XXXX-2/VS-2012</div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-item__icon">💰</div>
+            <div class="cert-item__text">Transparentní účet veřejně dostupný online</div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-item__icon">📊</div>
+            <div class="cert-item__text">Výroční zprávy od roku 2012</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transparency__reports reveal">
+        <h3 style="margin-bottom:20px;font-size:1.2rem;">Výroční zprávy ke stažení</h3>
+        <div class="report-card">
+          <div class="report-card__icon">📄</div>
+          <div class="report-card__info">
+            <h4>Výroční zpráva 2023</h4>
+            <p>Přehled aktivit, financí a dopadu za rok 2023</p>
+          </div>
+          <div class="report-card__arrow">→</div>
+        </div>
+        <div class="report-card">
+          <div class="report-card__icon">📄</div>
+          <div class="report-card__info">
+            <h4>Výroční zpráva 2022</h4>
+            <p>Přehled aktivit, financí a dopadu za rok 2022</p>
+          </div>
+          <div class="report-card__arrow">→</div>
+        </div>
+        <div class="report-card">
+          <div class="report-card__icon">📄</div>
+          <div class="report-card__info">
+            <h4>Výroční zpráva 2021</h4>
+            <p>Přehled aktivit, financí a dopadu za rok 2021</p>
+          </div>
+          <div class="report-card__arrow">→</div>
+        </div>
+
+        <div style="margin-top: 28px; padding: 24px; background: var(--white); border-radius: var(--radius-md); border: 2px solid var(--gray-200);">
+          <div style="font-size:.85rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:8px;">Transparentní účet</div>
+          <div style="font-size:1.4rem;font-weight:800;color:#1a1a2e;letter-spacing:.02em;">2501234567 / 2010</div>
+          <div style="font-size:.875rem;color:var(--gray-400);margin-top:4px;">Fio banka – výpis dostupný online</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section" id="galerie">
+  <div class="container">
+    <div class="section-header reveal" style="margin-bottom:40px;">
+      <div class="badge">Galerie</div>
+      <h2>Okamžiky, které nás pohánějí dál</h2>
+    </div>
+
+    <div class="gallery__grid reveal">
+      <div class="gallery__item">
+        <div class="gallery__placeholder" style="min-height:400px;">
+          <div class="emoji">🏕️</div>
+          <p>Letní rekondiční tábor 2024</p>
+        </div>
+      </div>
+      <div class="gallery__item gallery__item--blue">
+        <div class="gallery__placeholder">
+          <div class="emoji">⚽</div>
+          <p>Sportovní den v dětském domově</p>
+        </div>
+      </div>
+      <div class="gallery__item gallery__item--green">
+        <div class="gallery__placeholder">
+          <div class="emoji">🎨</div>
+          <p>Výtvarný workshop</p>
+        </div>
+      </div>
+      <div class="gallery__item gallery__item--yellow">
+        <div class="gallery__placeholder">
+          <div class="emoji">🎭</div>
+          <p>Divadelní představení Praha</p>
+        </div>
+      </div>
+      <div class="gallery__item gallery__item--purple">
+        <div class="gallery__placeholder">
+          <div class="emoji">🎵</div>
+          <p>Hudební kroužek</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section section--gray" id="reference">
+  <div class="container">
+    <div class="section-header reveal" style="margin-bottom:48px;">
+      <div class="badge">Co říkají ostatní</div>
+      <h2>Hlasy těch, kteří jsou součástí naší komunity</h2>
+    </div>
+
+    <div class="testimonials__grid">
+      <div class="testimonial-card reveal">
+        <p class="testimonial-card__text">
+          "Rekondiční pobyt byl pro mého syna po chemoterapii jako zázrak.
+          Přijel zpátky plný energie a s novými kamarády. Děkuji z celého srdce."
+        </p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">M</div>
+          <div>
+            <div class="testimonial-card__name">Martina K.</div>
+            <div class="testimonial-card__role">Matka chlapce, 9 let</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <p class="testimonial-card__text">
+          "Jako ředitelka dětského domova oceňuji, že Charita dětem opravdu
+          přijede, zapojí se a naše děti baví. Nejsou to prázdné sliby."
+        </p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar" style="background: var(--blue)">J</div>
+          <div>
+            <div class="testimonial-card__name">Jana Horáčková</div>
+            <div class="testimonial-card__role">Ředitelka DD Praha-Dolní Počernice</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <p class="testimonial-card__text">
+          "Přispívám pravidelně každý měsíc. Vím, že peníze jdou tam, kam mají –
+          transparentní účet to potvrzuje. Velká důvěra v tuto organizaci."
+        </p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar" style="background: var(--orange)">P</div>
+          <div>
+            <div class="testimonial-card__name">Pavel Novák</div>
+            <div class="testimonial-card__role">Pravidelný dárce od 2018</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="section section--blue" style="padding: 72px 0;">
+  <div class="container text-center reveal">
+    <div class="badge badge--white">Přidejte se k nám</div>
+    <h2 style="color:#fff; margin-bottom:20px; max-width:600px; margin-left:auto; margin-right:auto;">
+      Každý příspěvek mění životy skutečných dětí
+    </h2>
+    <p style="color:rgba(255,255,255,.75); max-width:500px; margin: 0 auto 36px; font-size:1.0625rem;">
+      Přidejte se k více než tisíci dárců, kteří společně s námi budují
+      lepší budoucnost pro děti v nouzi.
+    </p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="#pomoc" class="btn btn-white">❤️ Přispět nyní</a>
+      <a href="#kontakt" class="btn btn-outline-white">Napsat nám</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="kontakt">
+  <div class="container">
+    <div class="contact__inner">
+      <div class="contact__info reveal">
+        <div class="badge">Kontakt</div>
+        <h2>Máte otázku? Napište nebo zavolejte</h2>
+        <p>
+          Rádi vám odpovíme na jakékoliv dotazy ohledně naší činnosti,
+          dárcovství nebo dobrovolnictví. Jsme tu pro vás.
+        </p>
+
+        <div class="contact__items">
+          <div class="contact__item">
+            <div class="contact__item-icon">📍</div>
+            <div>
+              <div class="contact__item-label">Adresa</div>
+              <div class="contact__item-value">Praha, Česká republika</div>
+            </div>
+          </div>
+          <div class="contact__item">
+            <div class="contact__item-icon">✉️</div>
+            <div>
+              <div class="contact__item-label">E-mail</div>
+              <div class="contact__item-value">
+                <a href="mailto:info@charitadetem.cz" style="color:var(--red)">info@charitadetem.cz</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact__item">
+            <div class="contact__item-icon">🌐</div>
+            <div>
+              <div class="contact__item-label">Web</div>
+              <div class="contact__item-value">
+                <a href="http://charitadetem.cz" style="color:var(--red)" target="_blank">charitadetem.cz</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact__item">
+            <div class="contact__item-icon">🏦</div>
+            <div>
+              <div class="contact__item-label">Transparentní účet</div>
+              <div class="contact__item-value">2501234567 / 2010 (Fio banka)</div>
+            </div>
+          </div>
+          <div class="contact__item">
+            <div class="contact__item-icon">🔖</div>
+            <div>
+              <div class="contact__item-label">IČO</div>
+              <div class="contact__item-value">Charita dětem z.s.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact__form reveal">
+        <h3>Napište nám</h3>
+        <p class="sub">Odpovídáme do 2 pracovních dnů.</p>
+
+        <form onsubmit="handleForm(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Jméno a příjmení *</label>
+              <input type="text" id="name" placeholder="Jan Novák" required />
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail *</label>
+              <input type="email" id="email" placeholder="jan@email.cz" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="subject">Předmět</label>
+            <select id="subject">
+              <option>Dotaz ohledně dárcovství</option>
+              <option>Zájem o dobrovolnictví</option>
+              <option>Spolupráce s dětským domovem</option>
+              <option>Média a press</option>
+              <option>Jiné</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Zpráva *</label>
+            <textarea id="message" placeholder="Napište nám..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit">
+            Odeslat zprávu →
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <div class="nav__logo" style="margin-bottom:16px;">
+          <div class="nav__logo-icon">
+            <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </div>
+          <div class="nav__logo-text">
+            <span class="nav__logo-name" style="color:#fff;">Charita dětem</span>
+            <span class="nav__logo-sub">z. s.</span>
+          </div>
+        </div>
+        <p>
+          Pomáháme dětem z dětských domovů a dětem s onkologickým onemocněním.
+          Každý dar mění život. Děkujeme za vaši důvěru a podporu.
+        </p>
+        <div class="socials">
+          <div class="social-btn" title="Facebook">f</div>
+          <div class="social-btn" title="Instagram">📸</div>
+          <div class="social-btn" title="YouTube">▶</div>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h5>Organizace</h5>
+        <ul>
+          <li><a href="#o-nas">O nás</a></li>
+          <li><a href="#projekty">Projekty</a></li>
+          <li><a href="#transparentnost">Výroční zprávy</a></li>
+          <li><a href="#galerie">Galerie</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h5>Pomoc</h5>
+        <ul>
+          <li><a href="#pomoc">Jak přispět</a></li>
+          <li><a href="#pomoc">Pravidelný dar</a></li>
+          <li><a href="#kontakt">Dobrovolnictví</a></li>
+          <li><a href="#kontakt">Firemní dárcovství</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h5>Informace</h5>
+        <ul>
+          <li><a href="#transparentnost">Transparentní účet</a></li>
+          <li><a href="#kontakt">GDPR / Soukromí</a></li>
+          <li><a href="#kontakt">Cookies</a></li>
+          <li><a href="http://charitadetem.cz" target="_blank">charitadetem.cz</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© 2024 Charita dětem z.s. Všechna práva vyhrazena.</span>
+      <span>Registrovaný spolek · IČO dostupné na charitadetem.cz · Praha, ČR</span>
+    </div>
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+  // ── NAV SCROLL ──
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ── MOBILE NAV ──
+  const burger = document.getElementById('burger');
+  const mobileNav = document.getElementById('mobileNav');
+  let mobileOpen = false;
+  burger.addEventListener('click', () => {
+    mobileOpen = !mobileOpen;
+    mobileNav.style.display = mobileOpen ? 'flex' : 'none';
+  });
+  function closeMobile() { mobileOpen = false; mobileNav.style.display = 'none'; }
+
+  // ── SCROLL REVEAL ──
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        e.target.style.transitionDelay = (i % 3) * 0.08 + 's';
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // ── COUNTER ANIMATION ──
+  const stats = document.querySelectorAll('.stat-num[data-target]');
+  const statsObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const target = +el.dataset.target;
+        const suffix = target >= 500 ? '+' : target >= 10 ? '+' : '';
+        let current = 0;
+        const step = target / 60;
+        const timer = setInterval(() => {
+          current = Math.min(current + step, target);
+          el.textContent = Math.floor(current) + suffix;
+          if (current >= target) clearInterval(timer);
+        }, 20);
+        statsObs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  stats.forEach(s => statsObs.observe(s));
+
+  // ── AMOUNT BUTTONS ──
+  function setAmount(btn, amount) {
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // ── HELP TYPE ──
+  function setHelpType(card, type) {
+    document.querySelectorAll('.help-card').forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
+  }
+
+  // ── FORM SUBMIT ──
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.textContent = '✓ Zpráva odeslána!';
+    btn.style.background = '#27ae60';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Odeslat zprávu →';
+      btn.style.background = '';
+      btn.disabled = false;
+      e.target.reset();
+    }, 3500);
+  }
+</script>
+</body>
+</html>
