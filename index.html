@@ -765,6 +765,24 @@
 
     /* number counter animation */
     .count-up { transition: none; }
+
+    /* ===== PHOTO IMAGES ===== */
+    .hero__img-placeholder img,
+    .about__img-box img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .hero__img-placeholder { padding: 0; overflow: hidden; }
+    .about__img-box { padding: 0; overflow: hidden; }
+    .gallery__item img { width: 100%; height: 100%; min-height: inherit; object-fit: cover; display: block; position: absolute; top: 0; left: 0; }
+    .gallery__item { position: relative; }
+    .gallery__overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 12px 16px;
+      background: linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 100%);
+      color: #fff; font-size: .8rem; font-weight: 600;
+    }
+    .testimonial-card__avatar img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; display: block; }
+    .testimonial-card__avatar { overflow: hidden; padding: 0; font-size: 0; }
   </style>
 </head>
 <body>
@@ -870,8 +888,7 @@
           <!-- Main card -->
           <div class="hero__main-card">
             <div class="hero__img-placeholder">
-              <div class="hero__img-icon">👧🧒</div>
-              <p class="hero__img-caption">Děti ze spolupracujících dětských domovů</p>
+              <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80" alt="Děti ze spolupracujících dětských domovů" loading="lazy" />
             </div>
             <div class="hero__card-body">
               <h4>Letní rekondiční tábor 2024</h4>
@@ -895,8 +912,7 @@
     <div class="about__inner">
       <div class="about__img reveal">
         <div class="about__img-box">
-          <div class="icon">🤝</div>
-          <p style="font-size:.9rem;color:var(--gray-400);font-weight:500">Parta srdcí s velkým záměrem</p>
+          <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=800&q=80" alt="Tým Charita dětem z.s. – dobrovolníci s dětmi" loading="lazy" />
         </div>
         <div class="about__img-badge">
           Registrovaný spolek od 2012
@@ -1111,8 +1127,8 @@
 
       <div class="donation-box__account">
         <div class="donation-box__account-label">Transparentní účet</div>
-        <div class="donation-box__account-num" id="accountNum">2501234567 / 2010</div>
-        <div class="donation-box__account-bank">Fio banka, a.s. · VS: 2024 · zpráva: Dar pro děti</div>
+        <div class="donation-box__account-num" id="accountNum">5566778850 / 5500</div>
+        <div class="donation-box__account-bank">Raiffeisenbank a.s. · zpráva: Dar pro děti</div>
       </div>
 
       <p class="donation-note">
@@ -1134,7 +1150,7 @@
         <p>
           Transparentnost je pro nás základní hodnotou, ne pouhý slogan.
           Veškeré příjmy i výdaje organizace jsou veřejně dostupné na
-          transparentním účtu Fio banky, přístupném komukoliv 24/7.
+          transparentním účtu Raiffeisenbank, přístupném komukoliv 24/7.
         </p>
         <p>
           Každý rok vydáváme podrobnou výroční zprávu s přehledem aktivit,
@@ -1191,8 +1207,8 @@
 
         <div style="margin-top: 28px; padding: 24px; background: var(--white); border-radius: var(--radius-md); border: 2px solid var(--gray-200);">
           <div style="font-size:.85rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:8px;">Transparentní účet</div>
-          <div style="font-size:1.4rem;font-weight:800;color:#1a1a2e;letter-spacing:.02em;">2501234567 / 2010</div>
-          <div style="font-size:.875rem;color:var(--gray-400);margin-top:4px;">Fio banka – výpis dostupný online</div>
+          <div style="font-size:1.4rem;font-weight:800;color:#1a1a2e;letter-spacing:.02em;">5566778850 / 5500</div>
+          <div style="font-size:.875rem;color:var(--gray-400);margin-top:4px;">Raiffeisenbank – výpis dostupný online</div>
         </div>
       </div>
     </div>
@@ -1209,34 +1225,24 @@
 
     <div class="gallery__grid reveal">
       <div class="gallery__item">
-        <div class="gallery__placeholder" style="min-height:400px;">
-          <div class="emoji">🏕️</div>
-          <p>Letní rekondiční tábor 2024</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=800&q=80" alt="Letní rekondiční tábor 2024" loading="lazy" style="min-height:400px;" />
+        <div class="gallery__overlay">Letní rekondiční tábor 2024</div>
       </div>
       <div class="gallery__item gallery__item--blue">
-        <div class="gallery__placeholder">
-          <div class="emoji">⚽</div>
-          <p>Sportovní den v dětském domově</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1593476087123-36d1de271f08?auto=format&fit=crop&w=600&q=80" alt="Sportovní den v dětském domově" loading="lazy" />
+        <div class="gallery__overlay">Sportovní den v dětském domově</div>
       </div>
       <div class="gallery__item gallery__item--green">
-        <div class="gallery__placeholder">
-          <div class="emoji">🎨</div>
-          <p>Výtvarný workshop</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80" alt="Výtvarný workshop" loading="lazy" />
+        <div class="gallery__overlay">Výtvarný workshop</div>
       </div>
       <div class="gallery__item gallery__item--yellow">
-        <div class="gallery__placeholder">
-          <div class="emoji">🎭</div>
-          <p>Divadelní představení Praha</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80" alt="Divadelní představení Praha" loading="lazy" />
+        <div class="gallery__overlay">Divadelní představení Praha</div>
       </div>
       <div class="gallery__item gallery__item--purple">
-        <div class="gallery__placeholder">
-          <div class="emoji">🎵</div>
-          <p>Hudební kroužek</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=600&q=80" alt="Hudební kroužek" loading="lazy" />
+        <div class="gallery__overlay">Hudební kroužek</div>
       </div>
     </div>
   </div>
@@ -1257,7 +1263,7 @@
           Přijel zpátky plný energie a s novými kamarády. Děkuji z celého srdce."
         </p>
         <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar">M</div>
+          <div class="testimonial-card__avatar"><img src="https://i.pravatar.cc/44?img=47" alt="Martina K." /></div>
           <div>
             <div class="testimonial-card__name">Martina K.</div>
             <div class="testimonial-card__role">Matka chlapce, 9 let</div>
@@ -1271,7 +1277,7 @@
           přijede, zapojí se a naše děti baví. Nejsou to prázdné sliby."
         </p>
         <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar" style="background: var(--blue)">J</div>
+          <div class="testimonial-card__avatar" style="background: var(--blue)"><img src="https://i.pravatar.cc/44?img=25" alt="Jana Horáčková" /></div>
           <div>
             <div class="testimonial-card__name">Jana Horáčková</div>
             <div class="testimonial-card__role">Ředitelka DD Praha-Dolní Počernice</div>
@@ -1285,7 +1291,7 @@
           transparentní účet to potvrzuje. Velká důvěra v tuto organizaci."
         </p>
         <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar" style="background: var(--orange)">P</div>
+          <div class="testimonial-card__avatar" style="background: var(--orange)"><img src="https://i.pravatar.cc/44?img=12" alt="Pavel Novák" /></div>
           <div>
             <div class="testimonial-card__name">Pavel Novák</div>
             <div class="testimonial-card__role">Pravidelný dárce od 2018</div>
@@ -1331,7 +1337,7 @@
             <div class="contact__item-icon">📍</div>
             <div>
               <div class="contact__item-label">Adresa</div>
-              <div class="contact__item-value">Praha, Česká republika</div>
+              <div class="contact__item-value">Z. Kopala 1162, 570 01 Litomyšl</div>
             </div>
           </div>
           <div class="contact__item">
@@ -1339,7 +1345,16 @@
             <div>
               <div class="contact__item-label">E-mail</div>
               <div class="contact__item-value">
-                <a href="mailto:info@charitadetem.cz" style="color:var(--red)">info@charitadetem.cz</a>
+                <a href="mailto:jana.pletnevova@charitadetem.cz" style="color:var(--red)">jana.pletnevova@charitadetem.cz</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact__item">
+            <div class="contact__item-icon">📞</div>
+            <div>
+              <div class="contact__item-label">Telefon</div>
+              <div class="contact__item-value">
+                <a href="tel:+420731808042" style="color:var(--red)">+420 731 808 042</a>
               </div>
             </div>
           </div>
@@ -1356,14 +1371,14 @@
             <div class="contact__item-icon">🏦</div>
             <div>
               <div class="contact__item-label">Transparentní účet</div>
-              <div class="contact__item-value">2501234567 / 2010 (Fio banka)</div>
+              <div class="contact__item-value">5566778850 / 5500 (Raiffeisenbank)</div>
             </div>
           </div>
           <div class="contact__item">
             <div class="contact__item-icon">🔖</div>
             <div>
               <div class="contact__item-label">IČO</div>
-              <div class="contact__item-value">Charita dětem z.s.</div>
+              <div class="contact__item-value">22760458</div>
             </div>
           </div>
         </div>
@@ -1466,7 +1481,7 @@
 
     <div class="footer__bottom">
       <span>© 2024 Charita dětem z.s. Všechna práva vyhrazena.</span>
-      <span>Registrovaný spolek · IČO dostupné na charitadetem.cz · Praha, ČR</span>
+      <span>Registrovaný spolek · IČO 22760458 · Jana Pletněvová, předsedkyně · Litomyšl, ČR</span>
     </div>
   </div>
 </footer>
